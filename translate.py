@@ -80,18 +80,21 @@ def get_all_translations(rna_sequence, genetic_code):
         `rna_sequence`.
     """
     rna_sequence = rna_sequence.upper()
-    number_of_bases = len(rna_sequence)
-    codon_index = number_of_bases - 3
+    number_of_bases =len(rna_sequence)
+    codon_index = number_of_bases -3
     if codon_index < 0:
         return []
-    aa_seq_list = []
+    amino_acid_seq_list = []
     for base_index in range(codon_index +1):
-        codon = rna_sequence[base_index:base_index +3]
+        codon = rna_sequence[base_index: base_index +3]
         if codon == "AUG":
-            aa_seq = translate_sequence(rna_sequence = rna_sequence[base_index:], genetic_code = genetic_code)
+            aa_seq = translate_sequence(
+                    rna_sequence = rna_sequence[base_index:],
+                    genetic_code = genetic_code)
             if aa_seq:
-                aa_seq_list+=aa_seq
-    return aa_seq_list
+                amino_acid_seq_list.append(aa_seq)
+    return amino_acid_seq_list
+
 
 def get_reverse(sequence):
     """Reverse orientation of `sequence`.
